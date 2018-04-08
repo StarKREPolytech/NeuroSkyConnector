@@ -19,9 +19,8 @@ object Parser {
         RawData(parsed)
       }
     } else {
-      new PoorSignalLevel(200)
+      PoorSignalLevel(200)
     }
-
   }
 
   private def value(jsonMap: Map[String, Any], key: String, defaultValue: Int = 0): Int = {

@@ -3,7 +3,7 @@ package scalaProgram.main
 import java.io.{File, PrintWriter}
 
 import scalaProgram.connection.NeuroIterator
-import scalaProgram.lib.NeuroData
+import scalaProgram.lib.{EEG, NeuroData, Parser}
 
 import scala.concurrent.duration._
 import scala.util.{Failure, Success, Try}
@@ -49,11 +49,6 @@ class NeuroRecorder extends Thread {
       // data looks like this: EEG(ESense(35,40),EEGPower(595473,17991,4579,4579,1673,2541,1370,1370),PoorSignalLevel(0))
       println(s"$recording")
       printWriter.write(s"$recording\n")
-      //parse json:
-      val neuralData =
-
-
-
       if (currentMinute != lastMinute) {
         println(s"MINUTE: $currentMinute")
         lastMinute = currentMinute
