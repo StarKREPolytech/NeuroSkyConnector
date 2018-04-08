@@ -2,17 +2,13 @@ package scalaProgram.main
 
 import java.io.{File, PrintWriter}
 
+import javaPrograms.{NeuroInfo, Parser}
 import scalaProgram.connection.NeuroIterator
-import scalaProgram.lib.{EEG, NeuroData, Parser}
 
 import scala.concurrent.duration._
 import scala.util.{Failure, Success, Try}
 
 object BrainWaveRecorder extends App {
-
-  val neuroData = {
-    new NeuroData
-  }
 
   val recorder = {
     new NeuroRecorder
@@ -32,6 +28,8 @@ class NeuroRecorder extends Thread {
 
   val timeFormat = new SimpleDateFormat("hh:mm")
 
+  var neuroInfo = new NeuroInfo()
+
   private lazy val neuroIterator: NeuroIterator = {
     Try(new NeuroIterator) match {
       case Success(v) => v
@@ -41,7 +39,7 @@ class NeuroRecorder extends Thread {
     }
   }
 
-  override def run() {
+  override def run(): Unit = {
     val printWriter = new PrintWriter(new File("log.txt"))
     var lastMinute = "xx:xx"
     while (true) {
@@ -49,6 +47,14 @@ class NeuroRecorder extends Thread {
       // data looks like this: EEG(ESense(35,40),EEGPower(595473,17991,4579,4579,1673,2541,1370,1370),PoorSignalLevel(0))
       println(s"$recording")
       printWriter.write(s"$recording\n")
+      //Extraction data:------------------------------
+      val attention = Parser.getAttention(recording)
+      val meditation = Parser.getMeditation(recording)
+      neuroInfo.setAttention(attention)
+      neuroInfo.setMeditation(meditation)
+      println("Attention: " + neuroInfo.getAttention)
+      println("Meditation: " + neuroInfo.getMeditation)
+      //-----------------------------------------------
       if (currentMinute != lastMinute) {
         println(s"MINUTE: $currentMinute")
         lastMinute = currentMinute
