@@ -1,4 +1,4 @@
-organization := "me.shadaj.neuro"
+organization := "me.starkre"
 
 scalaVersion := "2.10.4"
 
