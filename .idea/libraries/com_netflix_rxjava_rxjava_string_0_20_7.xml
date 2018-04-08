@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="com.netflix.rxjava:rxjava-string:0.20.7" type="repository">
+    <properties maven-id="com.netflix.rxjava:rxjava-string:0.20.7" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/rxjava-string-0.20.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxjava-core-0.20.7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/rxjava-string-0.20.7-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxjava-core-0.20.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/rxjava-string-0.20.7-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxjava-core-0.20.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

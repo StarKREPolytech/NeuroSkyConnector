@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_10" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/neuro-thinkgear-master/src/main" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/neuro-thinkgear-master/src/test" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="scala-sdk-2.12.5" level="application" />
+    <orderEntry type="library" name="com.netflix.rxjava:rxjava-string:0.20.7" level="project" />
+    <orderEntry type="library" name="com.github.mrstampy:esp-thinkgear:2.1" level="project" />
+    <orderEntry type="library" name="io.reactivex:rxscala_2.10:0.24.1" level="project" />
+    <orderEntry type="library" name="org.scalatest:scalatest_2.9.0-1:2.0.M5" level="project" />
+    <orderEntry type="library" name="scala-sdk-2.12.5" level="application" />
+  </component>
+</module>
