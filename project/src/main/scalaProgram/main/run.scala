@@ -8,7 +8,7 @@ import scalaProgram.connection.NeuroIterator
 import scala.concurrent.duration._
 import scala.util.{Failure, Success, Try}
 
-object BrainWaveRecorder extends App {
+class BrainWaveRecorder {
 
   val recorder = {
     new NeuroRecorder
