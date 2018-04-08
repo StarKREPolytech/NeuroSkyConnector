@@ -3,6 +3,7 @@ package scalaProgram.main
 import java.io.{File, PrintWriter}
 
 import javaPrograms.{NeuroInfo, Parser}
+import org.json.JSONObject
 import scalaProgram.connection.NeuroIterator
 
 import scala.concurrent.duration._
@@ -48,12 +49,33 @@ class NeuroRecorder extends Thread {
       println(s"$recording")
       printWriter.write(s"$recording\n")
       //Extraction data:------------------------------
-      val attention = Parser.getAttention(recording)
-      val meditation = Parser.getMeditation(recording)
-      neuroInfo.setAttention(attention)
-      neuroInfo.setMeditation(meditation)
-      println("Attention: " + neuroInfo.getAttention)
-      println("Meditation: " + neuroInfo.getMeditation)
+      val json = new JSONObject(recording)
+      if (json.has("poorSignalLevel")) {
+        val poorSignal = json.get("poorSignalLevel").toString
+        println(poorSignal)
+        if (json.has("eSense")) {
+          val eSense = json.getJSONObject("eSense")
+          val attention = eSense.get("attention")
+          println("Attention: " + attention)
+        }
+      }
+      if (json.has("blinkStrength")) {
+        println("Blink strength: " + json.get("blinkStrength"))
+      }
+      //      val obj = new JSONObject(recording)
+      //      val eSenceArray = obj.getJSONArray("eSence")
+      //      val attentionAndMeditation = eSenceArray.get(0)
+      //      val jsonAttention = new JSONObject(attentionAndMeditation)
+      //      val attention = jsonAttention.get("attention")
+      //      println(attention)
+
+
+      //      val attention = Parser.getAttention(recording)
+      //      val meditation = Parser.getMeditation(recording)
+      //      neuroInfo.setAttention(attention)
+      //      neuroInfo.setMeditation(meditation)
+      //      println("Attention: " + neuroInfo.getAttention)
+      //      println("Meditation: " + neuroInfo.getMeditation)
       //-----------------------------------------------
       if (currentMinute != lastMinute) {
         println(s"MINUTE: $currentMinute")

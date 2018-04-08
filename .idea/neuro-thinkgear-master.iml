@@ -15,5 +15,6 @@
     <orderEntry type="library" name="io.reactivex:rxscala_2.10:0.24.1" level="project" />
     <orderEntry type="library" name="org.scalatest:scalatest_2.9.0-1:2.0.M5" level="project" />
     <orderEntry type="library" name="scala-sdk-2.12.5" level="application" />
+    <orderEntry type="library" name="javolution:javolution:5.5.1" level="application" />
   </component>
 </module>
