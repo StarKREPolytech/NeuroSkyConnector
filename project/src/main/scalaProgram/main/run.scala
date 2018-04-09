@@ -2,9 +2,10 @@ package scalaProgram.main
 
 import java.io.{File, PrintWriter}
 
-import javaPrograms.{NeuroInfo, Parser}
+import javaPrograms.neuroData.{Blink, EEGPower, ESence, PoorSignal}
 import org.json.JSONObject
 import scalaProgram.connection.NeuroIterator
+import scalaProgram.neuroParser.NeuroParser
 
 import scala.concurrent.duration._
 import scala.util.{Failure, Success, Try}
@@ -29,8 +30,6 @@ class NeuroRecorder extends Thread {
 
   val timeFormat = new SimpleDateFormat("hh:mm")
 
-  var neuroInfo = new NeuroInfo()
-
   private lazy val neuroIterator: NeuroIterator = {
     Try(new NeuroIterator) match {
       case Success(v) => v
@@ -48,35 +47,9 @@ class NeuroRecorder extends Thread {
       // data looks like this: EEG(ESense(35,40),EEGPower(595473,17991,4579,4579,1673,2541,1370,1370),PoorSignalLevel(0))
       println(s"$recording")
       printWriter.write(s"$recording\n")
-      //Extraction data:------------------------------
-      val json = new JSONObject(recording)
-      if (json.has("poorSignalLevel")) {
-        val poorSignal = json.get("poorSignalLevel").toString
-        println(poorSignal)
-        if (json.has("eSense")) {
-          val eSense = json.getJSONObject("eSense")
-          val attention = eSense.get("attention")
-          println("Attention: " + attention)
-        }
-      }
-      if (json.has("blinkStrength")) {
-        println("Blink strength: " + json.get("blinkStrength"))
-      }
-      //      val obj = new JSONObject(recording)
-      //      val eSenceArray = obj.getJSONArray("eSence")
-      //      val attentionAndMeditation = eSenceArray.get(0)
-      //      val jsonAttention = new JSONObject(attentionAndMeditation)
-      //      val attention = jsonAttention.get("attention")
-      //      println(attention)
-
-
-      //      val attention = Parser.getAttention(recording)
-      //      val meditation = Parser.getMeditation(recording)
-      //      neuroInfo.setAttention(attention)
-      //      neuroInfo.setMeditation(meditation)
-      //      println("Attention: " + neuroInfo.getAttention)
-      //      println("Meditation: " + neuroInfo.getMeditation)
-      //-----------------------------------------------
+      NeuroParser.parse(recording)
+      //Printing attension via parser for example:
+      println("Attention: " + ESence.getATTENTION)
       if (currentMinute != lastMinute) {
         println(s"MINUTE: $currentMinute")
         lastMinute = currentMinute
